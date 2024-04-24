@@ -3,9 +3,13 @@ import React from "react";
 import EditDeleteDropDownComponent from "./EditDeleteDropDownComponent";
 import WorkspacePopupComponent from "./WorkspacePopupComponent";
 import { getAllWorkspaceService } from "@/service/workspace.service";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
+// eslint-disable-next-line @next/next/no-async-client-component
 export default async function SidebarComponent() {
   const workspaceData = await getAllWorkspaceService();
+
   return (
     <div className="pl-10 mt-6 h-screen">
       <div className="flex justify-between">
@@ -23,19 +27,17 @@ export default async function SidebarComponent() {
 
       {/* each workspace */}
       {workspaceData.data.map((data)=>(
-      <div key={data.workSpaceId} className="flex items-center mt-5 w-full">
-        <div className="rounded-full w-4 h-4 bg-todo"></div>
-        
-        <div className="flex justify-between w-full pl-3">
-          {/* <p>HRD Design</p> */}
-          <p>{data.workspaceName}</p>
+        <div key={data.workSpaceId} className="flex items-center mt-5 w-full">
+          <div className="rounded-full w-4 h-4 bg-todo" ></div>
+          
+          <Link className="flex justify-between w-full pl-3" href={`/todo-list/${data.workSpaceId}?sidebar=workspace`}>
+            {/* <p>HRD Design</p> */}
+            <p>{data.workspaceName}</p>
 
-
-          <EditDeleteDropDownComponent />
+          </Link>
+            <EditDeleteDropDownComponent />
         </div>
-      </div>
-      
-    ))}
+      ))}
 
       {/* favorite*/}
       <div className="flex justify-between mt-10">
@@ -44,12 +46,21 @@ export default async function SidebarComponent() {
       </div>
 
       {/* each favorite workspace */}
-      <div className="flex items-center mt-5 w-full">
-        <div className="rounded-full w-4 h-4 bg-workingOn"></div>
-        <div className="flex justify-between w-full pl-3">
-          <p>GKS Scholarship</p>
-        </div>
-      </div>
+        {workspaceData.data.map((data)=>{
+          if (data.isFavorite) {
+            return (
+              <div key={data.workSpaceId} className="flex items-center mt-5 w-full">
+                <div className="rounded-full w-4 h-4 bg-workingOn"></div>
+                
+                <Link className="flex justify-between w-full pl-3" href={`/todo-list/${data.workSpaceId}?sidebar=favorite`}>
+                  {/* <p>HRD Design</p> */}
+                  <p>{data.workspaceName}</p>
+
+                </Link>
+              </div>
+            )
+          }
+        })}
     </div>
   );
 }

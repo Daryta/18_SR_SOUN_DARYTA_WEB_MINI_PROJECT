@@ -2,12 +2,19 @@ import Image from "next/image";
 import React from "react";
 import EditDeleteDropDownComponent from "./EditDeleteDropDownComponent";
 
-export default function TodoCardComponent() {
+export default function TodoCardComponent({ task }) {
+
+    const date = new Date(task.dueDate)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because getMonth returns zero-based index
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const formattedDate = `${month} ${day}, ${year}`;
+
   return (
     <div className="border border-gray rounded-lg w-full mt-5 relative">
       <div className="p-5">
         <div className="flex justify-between">
-          <p>Slack Integration</p>
+          <p>{task.taskTitle}</p>
           <div className="absolute top-2 right-3">
             {/* <Image
               src={"/assets/icons/tabler_dots.svg"}
@@ -19,12 +26,15 @@ export default function TodoCardComponent() {
           </div>
         </div>
 
-        <p className="text-gray">Description</p>
+        <p className="text-gray">{task.description}</p>
         <div className="flex justify-between items-center mt-5">
           <div className="bg-bgTag text-colorTag py-1 px-5 rounded-lg font-bold">
-            Development
+            {task.tag}
           </div>
-          <div className="rounded-full w-5 h-5 bg-todo"></div>
+          <div className={`rounded-full w-5 h-5 ${task?.status == 1 ? 'bg-yellow-300' 
+                                                : task?.status == 2 ? 'bg-blue-600' 
+                                                : task?.status == 3 ? 'bg-orange-300'
+                                                : 'bg-green-300' }`}></div>
         </div>
       </div>
 
@@ -36,7 +46,7 @@ export default function TodoCardComponent() {
           height={20}
           alt="calendar icon"
         />
-        <p className="text-gray">March 1, 2024</p>
+        <p className="text-gray">{formattedDate}</p>
       </div>
     </div>
   );

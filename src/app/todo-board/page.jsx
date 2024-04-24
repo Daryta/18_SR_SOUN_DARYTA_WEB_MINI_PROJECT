@@ -1,10 +1,9 @@
-import ListBoardComponentHeader from "@/components/ListBoardComponentHeader";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
-import TodoCardComponent from "@/components/TodoCardComponent";
-import React from "react";
+import Image from "next/image";
 
-const TodoBoardPage = () => {
+const TodoBoardPage = async () => {
+
   return (
     <div className="w-full flex">
       <section className="w-[21%]">
@@ -14,64 +13,11 @@ const TodoBoardPage = () => {
         <div>
           <NavbarComponent />
         </div>
-        <div className="mt-5 ml-2 mr-10">
-          <ListBoardComponentHeader />
-          <div></div>
-          <div className="w-full flex justify-between gap-6">
-          <section className="w-[24%] mb-5 ">
-             TODO
-             <hr className="text-yellow-500 " />
-             <TodoCardComponent />
-         
-           </section>
-           <section className="w-[24%] mb-5">
-             WORKING
-             <hr className="text-blue-500 " />
-             <TodoCardComponent />
-
-
-           </section>
-           <section className="w-[24%] mb-5">
-             CHECKING
-             <hr className="text-orange-500 " />
-             <TodoCardComponent />
-           </section>
-           <section className="w-[24%] mb-5">
-             COMPLETE
-             <hr className="text-green-500 " />
-             <TodoCardComponent />
-           </section>
-          </div>
+        <div className="w-full mt-48 flex justify-center items-center">
+          <Image src={"https://sofontsy.com/cdn/shop/products/welcome-cutting-file-for-farmhouse-sign-welcome-sign-greeting-sign-svg-dxf-and-more-glowforge-laser-ready-svg-diva-watts-designs-306122_1024x.jpg?v=1617077597"} width={550} height={100} />
         </div>
       </section>
     </div>
-
-    // <div className="w-[75%] ml-[305px]">
-    //     <NavbarComponent />
-    //   <ListBoardComponentHeader />
-    //   <div className="w-full  flex  justify-between  mt-3">
-    //     <section className="w-[24%] mb-5">
-    //       TODO
-    //       <hr className="text-yellow-500 " />
-    //       <TodoCardComponent />
-    //     </section>
-    //     <section className="w-[24%] mb-5">
-    //       WORKING
-    //       <hr className="text-blue-500 " />
-    //       <TodoCardComponent />
-    //     </section>
-    //     <section className="w-[24%] mb-5">
-    //       CHECKING
-    //       <hr className="text-orange-500 " />
-    //       <TodoCardComponent />
-    //     </section>
-    //     <section className="w-[24%] mb-5">
-    //       COMPLETE
-    //       <hr className="text-green-500 " />
-    //       <TodoCardComponent />
-    //     </section>
-    //   </div>
-    // </div>
   );
 };
 
