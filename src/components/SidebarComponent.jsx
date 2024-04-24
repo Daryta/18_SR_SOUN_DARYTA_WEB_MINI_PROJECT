@@ -2,8 +2,10 @@ import Image from "next/image";
 import React from "react";
 import EditDeleteDropDownComponent from "./EditDeleteDropDownComponent";
 import WorkspacePopupComponent from "./WorkspacePopupComponent";
+import { getAllWorkspaceService } from "@/service/workspace.service";
 
-export default function SidebarComponent() {
+export default async function SidebarComponent() {
+  const workspaceData = await getAllWorkspaceService();
   return (
     <div className="pl-10 mt-6 h-screen">
       <div className="flex justify-between">
@@ -12,25 +14,32 @@ export default function SidebarComponent() {
       </div>
 
       {/* workspace */}
+
+     
       <div className="flex justify-between mt-10">
         <h1 className="uppercase text-gray font-bold">workspace</h1>
         <WorkspacePopupComponent />
       </div>
 
       {/* each workspace */}
-      <div className="flex items-center mt-5 w-full">
+      {workspaceData.data.map((data)=>(
+      <div key={data.workSpaceId} className="flex items-center mt-5 w-full">
         <div className="rounded-full w-4 h-4 bg-todo"></div>
+        
         <div className="flex justify-between w-full pl-3">
-          <p>HRD Design</p>
+          {/* <p>HRD Design</p> */}
+          <p>{data.workspaceName}</p>
+
 
           <EditDeleteDropDownComponent />
         </div>
       </div>
+      
+    ))}
 
       {/* favorite*/}
       <div className="flex justify-between mt-10">
         <h1 className="uppercase text-gray font-bold">favorite</h1>
-
         <Image src={"/assets/icons/favorite.svg"} width={22} height={22} />
       </div>
 

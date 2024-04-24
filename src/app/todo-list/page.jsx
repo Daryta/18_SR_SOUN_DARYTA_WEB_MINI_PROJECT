@@ -1,11 +1,9 @@
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
-import { getAllWorkspaceService } from "@/service/workspace.service";
 import React from "react";
 import Image from "next/image"
 
-const TodoListPage = async() => {
-  const workspaceData = await getAllWorkspaceService()
+const TodoListPage = () => {
 ;  return (
     <div className="w-full flex">
       <section className="w-[21%]">
