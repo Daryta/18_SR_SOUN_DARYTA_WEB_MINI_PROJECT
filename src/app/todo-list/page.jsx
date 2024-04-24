@@ -1,12 +1,12 @@
-import ListBoardComponentHeader from "@/components/ListBoardComponentHeader";
-import ListCardComponent from "@/components/ListCardComponent";
-import MonthlyStatisticsComponent from "@/components/MonthlyStatisticsComponent";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
+import { getAllWorkspaceService } from "@/service/workspace.service";
 import React from "react";
+import Image from "next/image"
 
-const TodoPage = () => {
-  return (
+const TodoListPage = async() => {
+  const workspaceData = await getAllWorkspaceService()
+;  return (
     <div className="w-full flex">
       <section className="w-[21%]">
         <SidebarComponent />
@@ -15,19 +15,12 @@ const TodoPage = () => {
         <div>
           <NavbarComponent />
         </div>
-        <div className="mt-5 ml-2 mr-10 flex">
-          <section className="w-[70%]">
-            <ListBoardComponentHeader />
-            <ListCardComponent />
-          </section>
-
-          <section className="w-[30%] ml-10">
-            <MonthlyStatisticsComponent />
-          </section>
+        <div className="w-full mt-24 flex justify-center items-center">
+        <Image src={"https://sofontsy.com/cdn/shop/products/welcome-cutting-file-for-farmhouse-sign-welcome-sign-greeting-sign-svg-dxf-and-more-glowforge-laser-ready-svg-diva-watts-designs-306122_1024x.jpg?v=1617077597"} width={550} height={100} />
         </div>
       </section>
     </div>
   );
 };
 
-export default TodoPage;
+export default TodoListPage;
